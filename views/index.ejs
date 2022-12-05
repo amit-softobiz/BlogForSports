@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("./partials/head"); %>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <%- include('./partials/header'); %>
+  </header>
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4"><%= title %></h1>
+        <p class="lead">Welcome to <%= title %>.</p>
+        <hr class="my-4">
+        <p>A sports news site focusing on sports, sport fandoms, entertainment, and lifestyle pieces. It’s family owned and provides editorial content for all things sports related, such as football or racing.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+          
+        </div>
+    </div>
+  </div>
+ 
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>
+  </body>
+</html>
