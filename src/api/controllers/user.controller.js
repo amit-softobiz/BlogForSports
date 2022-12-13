@@ -11,7 +11,7 @@ const signUp=async(req, res)=>{
         res.status(201).json({
             message: "succesfull",
             status: 201,
-            methof: 'POST',
+            method: 'POST',
             user: user,
         })
     }catch(err){
@@ -31,13 +31,11 @@ const login =async(req, res)=>{
             method:'POST',
             userData:{
                 mail:result.user.email,
-                userId: result.user.userid,
                 token:result.token,
-                lastLogin:'1 jjjj',
             }
         })
     }catch (error) {
-        res.status(500).json({message:'login problem', detail:'error'})
+        res.status(500).json({message:'login problem', detail:error})
     }
 }
 module.exports={

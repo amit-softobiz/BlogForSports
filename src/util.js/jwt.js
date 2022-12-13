@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-const jwtSign =(userEmail, userId, secretKey)=>{
+const jwtSign =(userEmail, username, secretKey)=>{
     const payload = {
-        userId:userId.userId,
-        mail:userEmail.email,
+        username:username.username,
+        mail:userEmail
     };
-    const options ={
+    const options = {
         expiresIn:"1d"
     }
     try {
@@ -15,6 +15,7 @@ const jwtSign =(userEmail, userId, secretKey)=>{
         return error;
     }
 }
+
 const jwtVerify = (token,secretKey)=>{
     jwt.verify(token, secretKey, (error, user) =>{
         if(error){
