@@ -20,7 +20,7 @@ const signUp=async(req, res)=>{
     }
 }
 
-const login =async(req, res)=>{
+const login = async(req, res)=>{
     const userEmail    = req.body.email;
     const userPassword = req.body.password;
     try {

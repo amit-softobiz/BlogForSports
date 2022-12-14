@@ -16,19 +16,19 @@ const jwtSign =(userEmail, username, secretKey)=>{
     }
 }
 
-const jwtVerify = (token,secretKey)=>{
-    jwt.verify(token, secretKey, (error, user) =>{
-        if(error){
-            throw error
-        }else {
-            return user
-        }
-    })
-}
+// const jwtVerify = (token,secretKey)=>{
+//     jwt.verify(token, secretKey, (error, user) =>{
+//         if(error){
+//             throw error
+//         }else {
+//             return user
+//         }
+//     })
+// }
 
 
 
 module.exports= {
     jwtSign,
-    jwtVerify
+    // jwtVerify
 }

@@ -1,8 +1,8 @@
-const User = require('../models/user.schema');
-const {hash, compare } = require('../helpers/hash');
-const mongoose = require("mongoose");
-const {jwtSign} = require('../util.js/jwt');
-const config = require('../config/index');
+const User               = require('../models/user.schema');
+const {hash, compare }   = require('../helpers/hash');
+const mongoose           = require("mongoose");
+const {jwtSign}          = require('../util.js/jwt');
+const config             = require('../config/index');
 
 const signup = async(userDetail)=>{
     const user = new User({
