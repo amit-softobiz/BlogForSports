@@ -34,8 +34,24 @@ const login = async(userEmail, password)=>{
         throw Error('error in login');
     }
 }
+const adminpost = async(_id, reqbodycode)=>{
+    const adminSecret = config.adminSecret;
+    try {
+        if(reqbodycode == adminSecret){
+        const user = await User.findByIdAndUpdate(_id,{isAuthor:true});
+        return user
+        }
+        else{
+            console.log("code is wrong");
+        }
+    } catch (error) {
+        throw Error('admin post error');
+    }
+
+}
 
 module.exports={
     signup,
-    login
+    login,
+    adminpost
 }

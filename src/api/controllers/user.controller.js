@@ -1,5 +1,5 @@
 const authService = require("../../services/auth.sevice");
-
+const mongoose = require('mongoose');
 const signUp=async(req, res)=>{
     userDetail={
         username : req.body.username,
@@ -38,8 +38,27 @@ const login = async(req, res)=>{
         res.status(500).json({message:'login problem', detail:error})
     }
 }
+const isAdmin = async(req, res)=>{
+
+    const _id =  mongoose.Types.ObjectId(req.user._id);
+    const reqbody = req.body.secret;
+    
+    try {
+        const result = await authService.adminpost(_id,reqbody);
+        res.status(201).json({
+            message:'admin post successfully',
+            status:201,
+            method:'POST',
+            result:result
+         })
+    }catch (error) {
+        res.status(500).json({message:'is admin not working', detail:error})
+    }
+
+}
 module.exports={
     signUp,
-    login
+    login,
+    isAdmin
 }
 
