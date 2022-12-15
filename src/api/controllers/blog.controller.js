@@ -113,6 +113,21 @@ const published = async(req, res)=>{
         res.status(500).json({message:"something went wrong in getting blog", detail:error});
     }
 }
+const addcomment = async(req, res)=>{
+    const id = req.params.id;
+    const commentreq = req.body.comment;
+    try {
+            const comment = await blogService.commentBlogbyID(id, commentreq);
+            res.status(201).json({
+                message: "add comment succesfully",
+                status: 201,
+                method: 'post',
+                result: comment
+            }) 
+    } catch (error) {
+        res.status(500).json({message:"something went wrong in getting blog", detail:error});
+    }
+}
 
 module.exports={
     addblog,
@@ -120,5 +135,6 @@ module.exports={
     getBlogById,
     updateBlogById,
     deleteBlogById,
+    addcomment,
     published
 }
