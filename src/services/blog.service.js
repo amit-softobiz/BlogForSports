@@ -73,11 +73,7 @@ const commentBlogbyID=async(_id, comments)=>{
         const commentss = new Comment({comment:comments,blogID:_id});
         await commentss.save();
         const blog = await BlogSchema.findByIdAndUpdate({_id},{$push:{comment:commentss}});
-        // console.log("comment ", commentss);
-        // console.log("blog ", blog); 
-        // const saveComment = blog.comment.push(comments);
-        // console.log("save comment ", saveComment);
-       await blog.save(
+        await blog.save(
            (err, data)=>{
             if(err){
                 console.log("err", err);
@@ -91,7 +87,23 @@ const commentBlogbyID=async(_id, comments)=>{
     }
 }
 
-
+const getcommentsbyblogid = async(_id)=>{
+    console.log("service file...");
+    try {
+        const blog =await BlogSchema.findOne({_id});
+        const comment=blog.comment;
+        const data=[];
+        for (const value of comment) {
+             const _id = value;
+             const commentdata= await Comment.findById({_id});
+             data.push(commentdata);
+            }
+        return data;
+    } catch (error) {
+        console.log(error)
+        return Error("cannot get comment things went wrong");
+    }
+}
 
 
 module.exports={
@@ -101,5 +113,6 @@ module.exports={
     updateBlogbyID,
     deleteBlogbyID,
     publishBlogbyID,
-    commentBlogbyID
+    commentBlogbyID,
+    getcommentsbyblogid
 }
