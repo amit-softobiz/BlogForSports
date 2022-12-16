@@ -1,7 +1,8 @@
 const userviewservice = require('../../services/user.view.service')
 const getviewblog = async(req, res)=>{
         try {
-            const blogdata = await userviewservice.getBlog();
+            // console.log("req, user --------", req.user);
+            const blogdata = await userviewservice.getBlog(req.user.isAuthor);
             res.status(201).json({
                 message: "get all blog succesfully",
                 status: 201,
