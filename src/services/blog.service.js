@@ -32,9 +32,10 @@ const getBlogbyID = async(id)=>{
 const updateBlogbyID = async (id,data)=>{
     try {
         const blog = await BlogSchema.findByIdAndUpdate({_id:id},{"title":data.title, "description":data.description});
-        return blog;
+        if(blog) return blog;
+        else{return null}
     } catch (error) {
-        return Error("cannot get blog by id some error in get blog service");
+        return null;
     } 
 }
 const deleteBlogbyID = async (id)=>{

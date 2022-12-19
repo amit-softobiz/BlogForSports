@@ -61,19 +61,23 @@ const getBlogById = async (req, res)=>{
         res.status(500).json({message:"Something went wrong in getting blog by id (controller)", detail:error});
     }
 }
-updateBlogById = async (req, res)=>{
+const updateBlogById = async (req, res)=>{
     const {title, description}=req.body;
     const data = {title, description};
     const id = req.params.id;
     try {
         if(req.user.isAuthor == true){
         const blogdata = await blogService.updateBlogbyID(id, data);
+        console.log(" blog data ", blogdata);
+        if(blogdata != null){
         res.status(202).json({
             message : "Update blog by id succesfully",
             status  : 202,
             method  : 'POST',
-            blog    : blogdata,
         })
+    }else{
+        res.status(500).send("cannot update with this id ...")
+    }
     }else {
         console.log("Only admin has the access")
         res.send('Only admin has the access');
