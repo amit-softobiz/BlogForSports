@@ -15,18 +15,20 @@ const addBlog = async(addblogdetail)=>{
 const getBlog = async()=>{
     try {
         const blog = await BlogSchema.find({});
-        return blog;
+        if(blog.length != 0) return blog;
+        else{return null}
     } catch (error) {
-        return Error("cannot get all blog some error in get blog service");
+        return null;
     }
 }
 
 const getBlogbyID = async(id)=>{
     try {
-        const blog = await BlogSchema.find({_id:id});
-        return blog;
+        const blog = await BlogSchema.findById({_id:id});
+        if(blog.length != 0) return blog;
+        else{return null}
     } catch (error) {
-        return Error("cannot get blog by id some error in get blog service");
+        return null;
     }   
 }
 const updateBlogbyID = async (id,data)=>{

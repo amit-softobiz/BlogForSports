@@ -26,12 +26,14 @@ const getAllBlog = async (req, res)=>{
     try {
         if(req.user.isAuthor == true){
         const blogdata = await blogService.getBlog();
+        if(blogdata != null){
         res.status(200).json({
             message : "Get all blog succesfully",
             status  : 200,
             method  : 'GET',
             blog    : blogdata,
-        }) 
+        })
+    }else{res.status(500).send("There is not any blog...")} 
     }else{
         console.log("User is not admin");
         res.send('Only admin has the access');
@@ -46,12 +48,14 @@ const getBlogById = async (req, res)=>{
     try {
         if(req.user.isAuthor == true){
         const blogdata = await blogService.getBlogbyID(id);
+        if(blogdata != null){
         res.status(200).json({
             message : "Get blog by id succesfully",
             status  : 200,
             method  : 'POST',
             blog    : blogdata,
-        }) 
+        })
+    }else{res.status(500).send("blog id doesn't exist..")} 
         }else{
         console.log("User is not admin");
         res.send('Only admin has the access');
