@@ -40,17 +40,11 @@ const updateBlogbyID = async (id,data)=>{
 }
 const deleteBlogbyID = async (id)=>{
     try {
-        const blog = await BlogSchema.findByIdAndDelete({_id:id},(err, data)=>{
-            if(err){
-                console.log("err", err);
-            }else{
-                console.log("Deleted : ", data);
-            }
-
-        });
-        return blog;
-    } catch (error) {
-        return Error("cannot get blog by id some error in get blog service");
+        const blog = await BlogSchema.findByIdAndDelete({_id:id});
+        if(blog) return blog;
+        else{return null}
+      } catch (error) {
+           return null;
     } 
 }
 const publishBlogbyID = async (id)=>{

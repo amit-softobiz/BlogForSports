@@ -73,7 +73,7 @@ const updateBlogById = async (req, res)=>{
         res.status(202).json({
             message : "Update blog by id succesfully",
             status  : 202,
-            method  : 'POST',
+            method  : 'PUT',
         })
     }else{
         res.status(500).send("cannot update with this id ...")
@@ -92,12 +92,15 @@ const deleteBlogById = async(req, res)=>{
     try {
         if(req.user.isAuthor == true){
         const blogdata = await blogService.deleteBlogbyID(id);
+        if(blogdata != null){
         res.status(200).json({
             message  : "Delete blog by id succesfully",
             status   : 200,
-            method   : 'POST',
-            blog     : blogdata,
-        }) 
+            method   : 'DELETE',
+        })
+    }else{
+        res.status(500).send("blog id doesn't exist..");
+    } 
     }else {
         console.log("Only admin has the access")
         res.send('Only admin has the access');
