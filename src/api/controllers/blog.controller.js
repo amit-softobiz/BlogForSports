@@ -153,12 +153,16 @@ const getcomments = async(req, res)=>{
     try {
         if(req.user){
         const getComment = await blogService.getcommentsbyblogid(id);
+        if(getComment != null){
         res.status(200).json({
             message : "Get comment succesfully",
             status  : 200,
             method  : 'GET',
             result  : getComment
-        }) 
+        })
+    }else{
+        res.status(500).send("comment id does not exist..");
+    } 
     }else{
         res.send("Plese login first then you comment on this blog..")
         return;

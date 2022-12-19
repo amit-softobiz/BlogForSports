@@ -98,6 +98,7 @@ const getcommentsbyblogid = async(_id)=>{
     console.log("service file...");
     try {
         const blog =await BlogSchema.findOne({_id});
+        if(blog){
         const comment=blog.comment;
         const data=[];
         for (const value of comment) {
@@ -106,6 +107,9 @@ const getcommentsbyblogid = async(_id)=>{
              data.push(commentdata);
             }
         return data;
+        }else{
+            return null;
+        }
     } catch (error) {
         console.log(error)
         return Error("cannot get comment things went wrong");
