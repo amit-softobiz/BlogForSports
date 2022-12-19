@@ -70,18 +70,25 @@ const publishBlogbyID = async (id)=>{
 const commentBlogbyID=async(_id, comments)=>{
     try {
         console.log(_id, comments);
-        const commentss = new Comment({comment:comments,blogID:_id});
-        await commentss.save();
-        const blog = await BlogSchema.findByIdAndUpdate({_id},{$push:{comment:commentss}});
-        await blog.save(
-           (err, data)=>{
-            if(err){
-                console.log("err", err);
-            }else{
-                console.log("done ", data);
-            }
-        })
-        return data;
+        const findblog = await BlogSchema.findById({_id});
+        console.log(findblog);
+        if(findblog){
+            const commentss = new Comment({comment:comments,blogID:_id});
+            commentss.save();
+            const blog = await BlogSchema.findByIdAndUpdate({_id},{$push:{comment:commentss}});
+            blog.save(
+               (err, data)=>{
+                if(err){
+                    console.log("err", err);
+                }else{
+                    console.log("done ", data);
+                }
+            })
+            return data;
+        }else{
+            console.log(`there is no blog of this id ${_id}`);
+            return null;
+        }
     } catch (error) {
         return Error("cannot be comment thing went wrong");
     }
