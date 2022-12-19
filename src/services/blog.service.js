@@ -67,13 +67,13 @@ const publishBlogbyID = async (id)=>{
     } 
 }
 
-const commentBlogbyID=async(_id, comments)=>{
+const commentBlogbyID=async(userId,_id, comments)=>{
     try {
         console.log(_id, comments);
         const findblog = await BlogSchema.findById({_id});
         console.log(findblog);
         if(findblog){
-            const commentss = new Comment({comment:comments,blogID:_id});
+            const commentss = new Comment({comment:comments,blogID:_id,userId:userId});
             commentss.save();
             const blog = await BlogSchema.findByIdAndUpdate({_id},{$push:{comment:commentss}});
             blog.save(

@@ -10,9 +10,10 @@ const commentSchema = new Schema({
     blogID:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Blog'
-    }
+    },
+    userId:{
+            type:String
+        }
 })
-
-
 
 module.exports = mongoose.model("Comment", commentSchema);

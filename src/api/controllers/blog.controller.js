@@ -124,11 +124,12 @@ const published = async(req, res)=>{
     }
 }
 const addcomment = async(req, res)=>{
+    const userId = req.user._id;
     const id = req.params.id;
     const commentreq = req.body.comment;
     try {
          if(req.user){
-            const comment = await blogService.commentBlogbyID(id, commentreq);
+            const comment = await blogService.commentBlogbyID(userId,id, commentreq);
                 if(comment != null){
                 res.status(201).json({
                     message  : "Add comment succesfully",
