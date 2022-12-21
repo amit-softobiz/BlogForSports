@@ -23,9 +23,14 @@ const login = async(userEmail, password)=>{
     try {
         const user = await User.findOne({email:userEmail});
         const hash = user.password;
+        const payload={
+            _id:user._id,
+            username:user.username,
+            email:user.email
+        }
         const comparePass = await compare(password, hash);
         if(comparePass){
-            const token = await jwtSign(userEmail, user.username, config.jwtKey);
+            const token = await jwtSign(payload, config.jwtKey);
             return {user, token};
         }else{
             console.log('user id not there plese sign up ', user._id);
